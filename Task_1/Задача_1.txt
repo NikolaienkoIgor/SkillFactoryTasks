@@ -1,0 +1,69 @@
+Table Fact_Laureate as L {
+  laureate_id int //-> full_name varchar gender varchar
+  category varchar
+  prize_date_id date
+  birth_date_id date
+  death_date_id date
+  birth_city_id varchar 
+  org_city_id varchar 
+  death_city_id varchar 
+}
+
+Table Dim_Name as N {
+  laureate_id int
+  laureateType varchar
+  laureateName varchar
+  gender varchar
+  orgName varchar
+
+}
+Ref: L.laureate_id - N.laureate_id
+
+
+Table Dim_Date as D {
+  date_id date
+  year int
+  month int
+}
+Ref: L.prize_date_id - D.date_id
+Ref: L.birth_date_id - D.date_id
+Ref: L.death_date_id - D.date_id
+
+Table Dim_City as C {
+  city_id varchar
+  cityName varchar
+  region varchar 
+  countryCode_id varchar
+  population int
+  latitude latitude
+  longitude longitude
+}
+Ref: L.birth_city_id - C.city_id
+Ref: L.death_city_id - C.city_id
+Ref: L.org_city_id - C.city_id
+
+Table Dim_CountryName as CN {
+  countryCode_id varchar
+  countryName varchar
+  Region varchar
+  Population int
+  Area int
+  PopDensity decimal
+  Coastline decimal
+  Migration decimal
+  InfantMortality decimal
+  GDP decimal
+  Literacy decimal
+  Phones decimal
+  Arable decimal
+  Crops decimal
+  Other decimal
+  Climate decimal
+  Birthrate decimal
+  Deathrate decimal
+  Agriculture decimal
+  Industry decimal
+  Service decimal
+
+}
+Ref: C.countryCode_id - CN.countryCode_id
